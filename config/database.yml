@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+
+production: &production
+  <<: *default
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
+
+staging:
+  <<: *production
+
+development: &development
+  <<: *default
+  database: intra-app_development
+  min_messages: warning
+  host: localhost
+  username: postgres
+  password: postgres
+
+test:
+  <<: *development
+  database: intra-app_test
