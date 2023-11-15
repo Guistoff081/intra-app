@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <div class="logo">
+    <%= Rails.application.class.module_parent_name %>
+  </div>
+  <ul class="menu">
+    <li>
+      <%= nav_link_to "Home", root_path, class: "nav-link" %>
+    </li>
+    <li>
+      <a href="#" class="nav-link">About us</a>
+    </li>
+    <li>
+      <a href="#" class="nav-link">Blog</a>
+    </li>
+    <li>
+      <a href="#" class="nav-link">Contact</a>
+    </li>
+    <% if user_signed_in? %>
+      <li><%= nav_link_to "Edit profile", edit_user_registration_path, class: "nav-link" %></li>
+      <%= button_to t(".sign_out"), destroy_user_session_path, method: :delete, class: "text-red-400 hover:text-red-600 font-medium" %>
+    <% else %>
+      <li><%= nav_link_to "Sign up", new_user_registration_path, class: "nav-link" %></li>
+      <li><%= nav_link_to "Login", new_user_session_path, class: "nav-link" %></li>
+    <% end %>
+  </ul>
+</nav>
