@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Rails7VueVite</title>
+    <title>IntraApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -16,17 +16,28 @@
 
       Visit the guide for more information: https://vite-ruby.netlify.app/guide/rails
     -->
+    <script type='text/javascript'>
+            const translations = <%= ui_translations %>;
+    </script>
 
   </head>
 
   <body>
-    <div class="flex flex-col h-screen">
-      <%= render "shared/navbar" %>
-      <%= render "shared/flash" %>
-      <main class="container flex flex-col flex-1 px-5 mx-auto my-12">
+    <% if user_signed_in? %>
+      <div class="flex flex-col h-screen">
+        <%= render "shared/flash" %>
         <%= yield %>
-      </main>
-      <%= render "shared/footer" %>
-    </div>
+        <div id="vue-app"></div>
+      </div>
+    <% else %>
+      <div class="flex flex-col h-screen">
+        <%= render "shared/navbar" %>
+        <%= render "shared/flash" %>
+        <main class="container flex flex-col flex-1 px-5 mx-auto my-12">
+          <%= yield %>
+        </main>
+      </div>
+    <% end %>
+    <%= render "shared/footer" %>
   </body>
 </html>

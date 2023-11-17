@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  include PaginationHelper
+  DEFAULT_PAGE = 1
+  DEFAULT_PER_PAGE = 25
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -13,6 +16,4 @@ class ApplicationController < ActionController::Base
       u.permit(:first_name, :last_name, :name, :email, :password, :password_confirmation, :current_password)
     end
   end
-
-
 end

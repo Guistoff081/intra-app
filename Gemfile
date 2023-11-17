@@ -66,6 +66,13 @@ group :development do
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
   gem "rubycritic", require: false
-
   gem "annotate"
 end
+
+group :test do
+  gem 'simplecov', require: false
+end
+
+gem "will_paginate", "~> 4.0"
+
+gem "draper", "~> 4.0"

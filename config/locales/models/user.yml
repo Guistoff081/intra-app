@@ -1,0 +1,23 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      user:
+        one: Usuário
+        other: Usuários
+        zero: Nenhum usuário cadastrado
+    attributes:
+      user:
+        role: Função
+        avatar: Avatar
+        phone: Telefone
+        created_at: Criado em
+        updated_at: Atualizado em
+  enum:
+    user:
+      role:
+        administrator: Administrador
+        consultant: Consultor
+        operator: Operador
+
+

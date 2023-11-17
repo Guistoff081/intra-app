@@ -18,6 +18,10 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+if defined?(Rails::Server) && Rails.env.development?
+  require "debug/open_nonstop"
+end
+
 module IntraApp
   class Application < Rails::Application
     config.application_name = Rails.application.class.module_parent_name
