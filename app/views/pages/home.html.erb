@@ -1,5 +1,5 @@
 <% unless user_signed_in? %>
-  <div class="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
+<div class="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
   <div class="absolute inset-0 -z-10 overflow-hidden">
     <svg class="absolute left-[max(50%,25rem)] top-0 h-[64rem] w-[128rem] -translate-x-1/2 stroke-gray-200 [mask-image:radial-gradient(64rem_64rem_at_top,white,transparent)]" aria-hidden="true">
       <defs>
@@ -53,11 +53,13 @@
           </ul>
           <p class="mt-8">O Intra está aqui para te ajudar e salvar você de possíveis dores de cabeças no que se diz dos problemas com manutenção, rastreio e monitoramento de equipamentos de trabalho</p>
           <h2 class="mt-16 text-2xl font-bold tracking-tight text-gray-900">Deseja Experimentar?</h2>
-          <p class="mt-6">Fale conosco e agende sua demonstração <a href="#" class="nav-link">aqui</a>.</p>
+          <p class="mt-6">Fale conosco e agende sua demonstração <a href="#contact-us" class="nav-link">aqui</a>.</p>
         </div>
       </div>
     </div>
   </div>
+  <%= render 'about_us' %>
+  <%= render 'contact_us' %>
 </div>
 
 <% end %>

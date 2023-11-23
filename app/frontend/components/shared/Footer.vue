@@ -1,4 +1,7 @@
-<footer class="bg-white rounded-lg shadow sm:flex sm:items-center sm:justify-between p-4 sm:p-6 xl:p-8 dark:bg-gray-800 antialiased">
+<template>
+  <footer
+    class="bg-white rounded-lg shadow sm:flex sm:items-center sm:justify-between p-4 sm:p-6 xl:p-8 md:ml-64 dark:bg-gray-800 antialiased"
+  >
     <p class="mb-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:mb-0">
       &copy; 2023 <a href="https://intra-app.fly.dev/" class="hover:underline" target="_blank">IntraApp</a>. All rights reserved.
     </p>
@@ -47,7 +50,7 @@
         <div class="tooltip-arrow" data-popper-arrow></div>
       </div>
       <a
-        href="#"
+        href="https://github.com/Guistoff081/intra-app"
         data-tooltip-target="tooltip-github"
         class="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer dark:text-gray-400 dark:hover:text-white hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-600"
       >
@@ -91,4 +94,5 @@
         <div class="tooltip-arrow" data-popper-arrow></div>
       </div>
     </div>
-</footer>
+  </footer>
+</template>

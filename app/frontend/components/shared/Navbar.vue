@@ -87,10 +87,9 @@ import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAppStore } from '../../store.js';
 import { initFlowbite } from 'flowbite';
-import { RouterLink, useRouter } from 'vue-router';
+import { RouterLink } from 'vue-router';
 
 const store = useAppStore();
-const $router = useRouter();
 
 const { currentUser } = storeToRefs(store);
 
@@ -98,8 +97,7 @@ async function logout(e) {
   e.preventDefault();
   try {
     await store.destroySession();
-    $router.push({ name: 'dashboard' });
-    window.location.reload();
+    window.location.href = '/';
   } catch (error) {
     console.error('Error fetching data:', error);
   }

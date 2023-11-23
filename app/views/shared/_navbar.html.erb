@@ -8,17 +8,17 @@
       <%= nav_link_to "Home", root_path, class: "nav-link" %>
     </li>
     <li>
-      <a href="#" class="nav-link">Sobre nós</a>
+      <%= nav_link_to "Sobre nós", '#about-us', class: "nav-link" %>
     </li>
     <li>
-      <a href="#" class="nav-link">Fale conosco</a>
+      <%= nav_link_to "Fale conosco", '#contact-us', class: "nav-link" %>
     </li>
     <% if user_signed_in? %>
       <li><%= nav_link_to "Edit profile", edit_user_path(current_user), class: "nav-link" %></li>
       <%= button_to t("devise.navigation.sign_out"), destroy_user_session_path, method: :delete, class: "text-red-400 hover:text-red-600 font-medium" %>
     <% else %>
       <li>
-        <%= nav_link_to("Login", new_user_session_path, class: "nav-link") %>
+        <%= nav_link_to "Login", new_user_session_path, class: "nav-link" %>
       </li>
     <% end %>
   </ul>

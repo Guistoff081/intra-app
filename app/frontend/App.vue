@@ -7,6 +7,7 @@
         <RouterView></RouterView>
       </div>
     </main>
+    <Footer />
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import { initFlowbite } from 'flowbite';
 import { useAppStore } from './store';
 import Sidebar from '@/components/shared/Sidebar.vue';
 import Navbar from '@/components/shared/Navbar.vue';
+import Footer from '@/components/shared/Footer.vue';
 
 const store = useAppStore();
 
