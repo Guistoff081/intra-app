@@ -42,12 +42,13 @@ gem "devise", "~> 4.9"
 gem "cancancan", "~> 3.5"
 gem "name_of_person"
 
+gem "faker"
+gem "factory_bot_rails"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
   gem "rspec-rails", "~> 6.0"
-  gem "faker"
-  gem "factory_bot_rails"
 end
 
 group :development do
@@ -82,3 +83,4 @@ gem "dockerfile-rails", ">= 1.5", :group => :development
 gem "sentry-ruby", "~> 5.13"
 
 gem "sentry-rails", "~> 5.13"
+gem 'js_from_routes'

@@ -10,7 +10,7 @@
     "strict": true,
     "paths": {
       "@/*": ["app/*"],
-      "@/component*": ["app/frontend/components/*"]
+      "@/resources": ["app/frontend/resources/"]
     }
   },
   "include": ["app/**/*", "app/frontend/components/*"],

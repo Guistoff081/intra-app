@@ -1,54 +1,57 @@
 <template>
-  <form action="#">
+  <form @submit.prevent="handleSubmit">
     <div class="grid gap-4 mb-4 sm:grid-cols-2">
       <div>
         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
         <input
+          id="first_name"
+          v-model="user.first_name"
           type="text"
           name="first_name"
-          id="first_name"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           placeholder="Nome do usuário"
-          required=""
+          :required="isCreating"
         />
       </div>
       <div>
-        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sobrenome</label>
+        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sobrenome</label>
         <input
+          id="last_name"
+          v-model="user.last_name"
           type="text"
-          name="name"
-          id="name"
+          name="last_name"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           placeholder="Sobrenome do usuário"
-          required=""
+          :required="isCreating"
         />
       </div>
       <div>
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">E-mail</label>
         <input
+          id="brand"
           type="text"
           name="brand"
-          id="brand"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           placeholder="example@mail.com"
-          required=""
+          :required="isCreating"
         />
       </div>
       <div>
-        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone/Celular</label>
+        <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telefone/Celular</label>
         <input
+          id="phone"
           type="number"
-          name="price"
-          id="price"
+          name="phone"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           placeholder="(99) 9 9999-9999"
-          required=""
+          :required="isCreating"
         />
       </div>
       <div>
-        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Função</label
+        <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Função</label
         ><select
-          id="category"
+          id="role"
+          :required="isCreating"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
         >
           <option selected="">Selecionar</option>
@@ -61,21 +64,21 @@
         <div>
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
           <input
-            type="password"
             id="password"
+            type="password"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="•••••••••"
-            required
+            :required="isCreating"
           />
         </div>
         <div>
           <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
           <input
-            type="password"
             id="confirm_password"
+            type="password"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="•••••••••"
-            required
+            :required="isCreating"
           />
         </div>
       </div>
@@ -95,4 +98,29 @@
     </button>
   </form>
 </template>
-<script setup></script>
+<script setup>
+import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../store';
+const props = defineProps({
+  isCreating: Boolean
+});
+const store = useUserStore();
+const { user } = storeToRefs(store);
+
+const isCreating = ref(props.isCreating);
+
+async function handleSubmit() {
+  if (isCreating.value) {
+    await store.create(user);
+  }
+}
+
+async function newUser() {
+  try {
+    await store.new(url);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+</script>

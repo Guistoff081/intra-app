@@ -1,3 +1,14 @@
-import Index from '../users/components/Index.vue';
-
-export default [{ path: '/users', component: Index, name: 'users_path' }];
+export default [
+  {
+    path: '/users',
+    component: () => import('../users/components/Index.vue'),
+    name: 'users_path',
+    meta: {
+      resource: {
+        name: 'user',
+        indexUrl: '/users',
+        modalKey: 'UserCreate'
+      }
+    }
+  }
+];

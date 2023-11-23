@@ -1,5 +1,6 @@
 <nav class="navbar">
-  <div class="logo">
+  <div class="logo flex flex-row">
+    <%= vite_image_tag "images/intra-logo.jpg", class: 'h-8 w-auto mr-1', alt: 'Intra logo' %>
     <%= Rails.application.class.module_parent_name %>
   </div>
   <ul class="menu">
@@ -7,20 +8,18 @@
       <%= nav_link_to "Home", root_path, class: "nav-link" %>
     </li>
     <li>
-      <a href="#" class="nav-link">About us</a>
+      <a href="#" class="nav-link">Sobre nós</a>
     </li>
     <li>
-      <a href="#" class="nav-link">Blog</a>
-    </li>
-    <li>
-      <a href="#" class="nav-link">Contact</a>
+      <a href="#" class="nav-link">Fale conosco</a>
     </li>
     <% if user_signed_in? %>
       <li><%= nav_link_to "Edit profile", edit_user_path(current_user), class: "nav-link" %></li>
-      <li><%= nav_link_to t("activerecord.models.user.other"), users_path, class: "nav-link" %></li>
       <%= button_to t("devise.navigation.sign_out"), destroy_user_session_path, method: :delete, class: "text-red-400 hover:text-red-600 font-medium" %>
     <% else %>
-      <li><%= nav_link_to "Login", new_user_session_path, class: "nav-link" %></li>
+      <li>
+        <%= nav_link_to("Login", new_user_session_path, class: "nav-link") %>
+      </li>
     <% end %>
   </ul>
 </nav>

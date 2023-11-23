@@ -2,21 +2,32 @@
   <div class="flex flex-col">
     <div class="flex p-2"><h2>Usuários</h2></div>
     <Modal />
-    <DataTable :fields="columns" />
+    <DataTable id="users-datatable" :fields="columns" />
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useUserStore } from '../store.js';
 import { initFlowbite } from 'flowbite';
 import DataTable from '../../../components/shared/DataTable.vue';
 import Modal from './Modal.vue';
 
-const columns = ref(['Id', 'Nome', 'E-mail', 'Função', 'Criado em', 'Ultima atualização em', 'Link']);
+const store = useUserStore();
 
-defineEmits(['search', 'reset']);
+const { users } = storeToRefs(store);
 
-// initialize components based on data attribute selectors
+const columns = ref([
+  { label: 'Id', key: 'id' },
+  { label: 'Nome', key: 'name' },
+  { label: 'E-mail', key: 'email' },
+  { label: 'Função', key: 'role' },
+  { label: 'Criado em', key: 'created_at' },
+  { label: 'Ultima atualização em', key: 'updated_at' },
+  { label: 'Ações', key: 'actions' }
+]);
+
 onMounted(() => {
   initFlowbite();
 });

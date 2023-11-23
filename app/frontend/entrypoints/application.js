@@ -5,8 +5,11 @@ import Axios from 'axios';
 import { createPinia } from 'pinia';
 import Router from '../router.js';
 import { createApi } from '../plugins/api.js';
+import * as ActiveStorage from '@rails/activestorage';
 import { createI18n } from 'vue-i18n';
 import App from '../App.vue';
+
+ActiveStorage.start();
 
 const pinia = createPinia();
 const I18n = createI18n({ locale: 'pt-BR', messages: translations });

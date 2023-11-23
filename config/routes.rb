@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'pages#home'
+  root to: 'pages#home', export: true
   get 'pages/home'
-  resources :users
-  namespace :api, defaults: { format: :json } do
-    resources :users
+  resources :users, export: true
+  namespace :api, defaults: { format: :json }, export: true do
+    devise_for :users
+    resources :users do
+      collection do
+        get :current
+      end
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

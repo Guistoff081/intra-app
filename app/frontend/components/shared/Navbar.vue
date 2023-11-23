@@ -19,10 +19,10 @@
               ></path>
             </svg>
           </button>
-          <a href="<%= root_path %>" class="flex ms-2 md:me-24">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
+          <RouterLink to="/" class="flex ms-2 md:me-24">
+            <img src="@/images/intra-logo.jpg" class="h-8 me-3" alt="IntraApp Logo" />
             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">IntraApp</span>
-          </a>
+          </RouterLink>
         </div>
         <div class="flex items-center">
           <div class="flex items-center ms-3">
@@ -34,16 +34,16 @@
                 data-dropdown-toggle="dropdown-user"
               >
                 <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo" />
+                <img class="w-8 h-8 rounded-full" :src="currentUser.avatar" alt="user photo" />
               </button>
             </div>
             <div
-              class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
               id="dropdown-user"
+              class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
             >
               <div class="px-4 py-3" role="none">
-                <p class="text-sm text-gray-900 dark:text-white" role="none">Neil Sims</p>
-                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">neil.sims@flowbite.com</p>
+                <p class="text-sm text-gray-900 dark:text-white" role="none">{{ currentUser.name }}</p>
+                <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">{{ currentUser.email }}</p>
               </div>
               <ul class="py-1" role="none">
                 <li>
@@ -52,7 +52,7 @@
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     role="menuitem"
                   >
-                    Dashboard
+                    Perfil
                   </a>
                 </li>
                 <li>
@@ -61,7 +61,7 @@
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     role="menuitem"
                   >
-                    Settings
+                    Configurações
                   </a>
                 </li>
                 <li>
@@ -69,17 +69,9 @@
                     href="#"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                     role="menuitem"
+                    @click="logout"
                   >
-                    Earnings
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                    role="menuitem"
-                  >
-                    Sign out
+                    Sair
                   </a>
                 </li>
               </ul>
@@ -90,3 +82,30 @@
     </div>
   </nav>
 </template>
+<script setup>
+import { onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useAppStore } from '../../store.js';
+import { initFlowbite } from 'flowbite';
+import { RouterLink, useRouter } from 'vue-router';
+
+const store = useAppStore();
+const $router = useRouter();
+
+const { currentUser } = storeToRefs(store);
+
+async function logout(e) {
+  e.preventDefault();
+  try {
+    await store.destroySession();
+    $router.push({ name: 'dashboard' });
+    window.location.reload();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+onMounted(async () => {
+  initFlowbite();
+});
+</script>

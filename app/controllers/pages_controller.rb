@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
   def home
-    # render layout: 'pages'
+    respond_to do |format|
+      format.json { render json: {}, status: :no_content }
+      format.html { render :home }
+    end
   end
 end

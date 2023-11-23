@@ -24,6 +24,10 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit; end
 
+  def current
+    @user = current_user if current_user.present?
+  end
+
   # POST /users or /users.json
   def create
     @user = User.new(user_params)

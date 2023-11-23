@@ -22,10 +22,10 @@ export const useUserStore = defineStore('users', {
         this.user = response.data.user;
       });
     },
-    async create() {
+    async create(payload) {
       this.errors = {};
       return this.axios
-        .post('/users', this.user, {
+        .post('/users', payload, {
           headers: {
             'Content-Type': 'application/json'
           }
